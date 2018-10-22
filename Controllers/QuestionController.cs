@@ -146,7 +146,7 @@ namespace C_Sharp_Challenge_Skeleton.Controllers
         {
             var timer = new Stopwatch();
 
-            var exchanges = new Exchanges();
+            var exchanges = test.GetInput();
 
             timer.Start();
 
