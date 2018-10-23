@@ -1,4 +1,6 @@
-﻿namespace C_Sharp_Challenge_Skeleton.Answers
+﻿using System;
+
+namespace C_Sharp_Challenge_Skeleton.Answers
 {
     public class Question4
     {
@@ -24,7 +26,8 @@
                             int time = 0;
                             for (int k = 0; k < numOfConsecutiveMachines; k++)
                             {
-                                time += Convert.ToInt32(machineToBeFixed[i, ii - k]);
+                                time += Convert.(machineToBeFixed[i, ii - k]);
+                              
                             }
                             if (time < min)
                             {
