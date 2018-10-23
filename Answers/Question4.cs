@@ -26,7 +26,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                             int time = 0;
                             for (int k = 0; k < numOfConsecutiveMachines; k++)
                             {
-                                time += Convert.(machineToBeFixed[i, ii - k]);
+                                time += Convert.ToInt32(machineToBeFixed[i, ii - k]);
                               
                             }
                             if (time < min)
