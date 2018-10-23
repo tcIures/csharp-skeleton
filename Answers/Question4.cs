@@ -4,7 +4,7 @@
     {
         public static int Answer(string[,] machineToBeFixed, int numOfConsecutiveMachines)
         {
-            int min = Int32.MaxValue;
+            /*int min = Int32.MaxValue;
             bool ok = false;
             for (int i = 0; i < machineToBeFixed.GetLength(0); i++)
             {
@@ -43,7 +43,7 @@
             {
                 return 0;
             }
-            return min;
+            return min;*/
         }
     }
 }
