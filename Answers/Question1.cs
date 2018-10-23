@@ -8,9 +8,8 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 {
     public class Question1
     {
-        public static int getAnswer(ushort[] prt)
+        public static int Answer(int[] portfolios)
         {
-
             ushort max = UInt16.MinValue;
 
             for (int i = 0; i < prt.Length; i++)
@@ -25,13 +24,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                 }
             }
 
-            return max;
-        }
-
-        public static int Answer(int[] portfolios)
-        {
-            //TODO: Please work out the solution;
-            return -1;
+            return (int)max;
         }
     }
 }
