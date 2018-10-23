@@ -12,11 +12,11 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         {
             ushort max = UInt16.MinValue;
 
-            for (int i = 0; i < prt.Length; i++)
+            for (int i = 0; i < portofolios.Length; i++)
             {
-                for (int ii = i + 1; ii < prt.Length; ii++)
+                for (int ii = i + 1; ii < portofolios.Length; ii++)
                 {
-                    ushort result = (ushort)(prt[i] ^ prt[ii]);
+                    ushort result = (ushort)(portofolios[i] ^ portofolios[ii]);
                     if (result > max)
                     {
                         max = result;
