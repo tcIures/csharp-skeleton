@@ -5,42 +5,38 @@
         public static int Answer(int[] cashflowIn, int[] cashflowOut)
         {
             int n = cashflowIn.Length, m = cashflowOut.Length;
-            int[] cando = new int[10004];
-            int[] ans = new int[10004];
-            cando[0] = 1;
+            int bigNumber = 100000;
+            bool[] cando = new bool[bigNumber+4];
+            bool[] ans = new bool[bigNumber+4];
+            cando[0] = true;
             ans[0] = 0;
-            for (int i = 1; i <= n; i++)
-            {
-                cando[i] = 0;
-                ans[i] = 0;
-            }
             for (int i = 0; i < n; i++)
             {
-                for (int j = 10000 - cashflowIn[i]; j >= 0; j--)
+                for (int j = bigNumber - cashflowIn[i]; j >= 0; j--)
                 {
-                    if (cando[j] == 1)
+                    if (cando[j])
                     {
-                        cando[j + cashflowIn[i]] = 1;
-                        ans[j + cashflowIn[i]] = 1;
+                        cando[j + cashflowIn[i]] = true;
+                        ans[j + cashflowIn[i]] = true;
                         //System.out.println(j+cashflowIn[i]+"\n");
                     }
                 }
             }
             for (int i = 0; i < m; i++)
             {
-                for (int j = 0; j <= 10000; j++)
+                for (int j = 0; j <= bigNumber; j++)
                 {
-                    if (ans[j] == 1)
+                    if (ans[j])
                     {
                         if (j > cashflowOut[i]) ans[j - cashflowOut[i]] = 1;
-                        else ans[cashflowOut[i] - j] = 1;
+                        else ans[cashflowOut[i] - j] = true;
                         // System.out.println(j-cashflowOut[i]+"\n");
                     }
                 }
             }
-            for (int i = 0; i <= 10000; i++)
+            for (int i = 0; i <= bigNumber; i++)
             {
-                if (ans[i] == 1) return i;
+                if (ans[i]) return i;
             }
             return -1;
         }
