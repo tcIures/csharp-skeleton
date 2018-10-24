@@ -5,7 +5,7 @@
         public static int Answer(int[] cashflowIn, int[] cashflowOut)
         {
             int n = cashflowIn.Length, m = cashflowOut.Length;
-            int bigNumber = 100000;
+            int bigNumber = 10000;
             bool[] cando = new bool[bigNumber+4];
             bool[] ans = new bool[bigNumber+4];
             cando[0] = true;
