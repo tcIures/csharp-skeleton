@@ -28,7 +28,7 @@
                 {
                     if (ans[j])
                     {
-                        if (j > cashflowOut[i]) ans[j - cashflowOut[i]] = 1;
+                        if (j > cashflowOut[i]) ans[j - cashflowOut[i]] = true;
                         else ans[cashflowOut[i] - j] = true;
                         // System.out.println(j-cashflowOut[i]+"\n");
                     }
