@@ -9,7 +9,7 @@
             bool[] cando = new bool[bigNumber+4];
             bool[] ans = new bool[bigNumber+4];
             cando[0] = true;
-            ans[0] = 0;
+            ans[0] = false;
             for (int i = 0; i < n; i++)
             {
                 for (int j = bigNumber - cashflowIn[i]; j >= 0; j--)
