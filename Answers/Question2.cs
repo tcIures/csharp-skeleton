@@ -4,7 +4,7 @@
     {
         public static int Answer(int[] cashflowIn, int[] cashflowOut)
         {
-            int n = cashflowIn.length, m = cashflowOut.length;
+            int n = cashflowIn.Length, m = cashflowOut.Length;
             int[] cando = new int[10004];
             int[] ans = new int[10004];
             cando[0] = 1;
