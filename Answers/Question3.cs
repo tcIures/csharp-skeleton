@@ -4,19 +4,6 @@ using C_Sharp_Challenge_Skeleton.Beans;
 namespace C_Sharp_Challenge_Skeleton.Answers
 {
 
-    public class Edge
-    {
-
-        public int EdgeA { get; set; }
-        public int EdgeB { get; set; }
-
-        public Edge(int a, int b)
-        {
-            EdgeA = a;
-            EdgeB = b;
-        }
-    }
-
     class Solver
     {
         int MAXN = 31;
@@ -111,12 +98,15 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 
             Solver sv = new Solver();
 
+            int numberOfEdges = 0;
+
             foreach (var item in edgeLists)
             {
+                numberOfEdges += 1;
                 sv.insertEdge(item.EdgeA, item.EdgeB);
             }
 
-            int minCover = sv.findMinCover(numOfNodes, edgeLists.Count());
+            int minCover = sv.findMinCover(numOfNodes, numberOfEdges);
 
             return numOfNodes - 2 * minCover;
         }
