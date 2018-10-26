@@ -4,8 +4,26 @@
     {
         public static int Answer(int[] numOfShares, int totalValueOfShares)
         {
-            //TODO: Please work out the solution;
-            return -1;
+            int size = numOfShares.Length;
+
+            int[] matrix = new int[totalValueOfShares + 1];
+
+            matrix[0] = 0;
+
+            for (int i = 1; i <= totalValueOfShares; i++)
+                matrix[i] = int.MaxValue;
+
+            for (int i = 1; i <= totalValueOfShares; i++)
+            {
+                for (int j = 0; j < size; j++)
+                    if (numOfShares[j] <= i)
+                    {
+                        int sum = matrix[i - numOfShares[j]];
+                        if (sum < int.MaxValue && sum + 1 < matrix[i])
+                            matrix[i] = sum + 1;
+                    }
+            }
+            return matrix[totalValueOfShares];
         }
     }
 }
