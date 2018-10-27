@@ -64,7 +64,19 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         public int getShortestDistance(int start)
         {
             totalCosts.Add(start, 0);
-            minHeapAdd(start);
+            //adds start node to minHeap
+            {
+                minHeap.Add(start);
+                int index = minHeap.Count - 1;
+                while ((index - 1) / 2 >= 0 && totalCosts[(index - 1) / 2] > totalCosts[minHeap[index]])
+                {
+
+                    int aux = minHeap[index];
+                    minHeap[index] = minHeap[(index - 1) / 2];
+                    minHeap[(index - 1) / 2] = aux;
+                    index = (index - 1) / 2;
+                }
+            }
             visited.Add(start);
             for (int i = 1; i < N; i++)
             {
@@ -76,8 +88,34 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 
             while (this.minHeap.Count != 0)
             {
-                printDebugData();
-                int newSmallest = minHeapPoll();
+                //printDebugData();
+                int newSmallest = 0;
+
+                {
+                    int item = minHeap[0];
+                    minHeap[0] = minHeap[minHeap.Count - 1];
+                    minHeap.RemoveAt(minHeap.Count - 1);
+                    int index = 0;
+                    while (index * 2 + 1 < minHeap.Count) //checks if node has left child
+                    {
+                        int smallerChildIndex = index * 2 + 1;
+                        if (index * 2 + 2 < minHeap.Count && totalCosts[2 * index + 2] < totalCosts[2 * index + 1])
+                        {
+                            smallerChildIndex = 2 * index + 2;
+                        }
+                        if (totalCosts[minHeap[index]] < totalCosts[minHeap[smallerChildIndex]])
+                        {
+                            break;
+                        }
+
+
+                        int aux = minHeap[index];
+                        minHeap[index] = minHeap[smallerChildIndex];
+                        minHeap[smallerChildIndex] = aux;
+                        index = smallerChildIndex;
+                    }
+                    newSmallest = item;
+                }
 
                 int nearest = 0;
                 int minDistance = Int32.MaxValue;
@@ -99,7 +137,20 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                     }
                 }
                 visited.Add(nearest);
-                minHeapAdd(nearest);
+                //adds nearest node to minHeap
+                {
+                    minHeap.Add(nearest);
+                    int index = minHeap.Count - 1;
+                    while ((index - 1) / 2 >= 0 && totalCosts[(index - 1) / 2] > totalCosts[minHeap[index]])
+                    {
+
+                        int aux = minHeap[index];
+                        minHeap[index] = minHeap[(index - 1) / 2];
+                        minHeap[(index - 1) / 2] = aux;
+                        index = (index - 1) / 2;
+                    }
+                }
+
                 if (nearest == target)
                 {
                     break;
@@ -110,115 +161,16 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         }
 
 
-        //Heap operations helper methods
-
-        private bool hasLeftChild(int index)
-        {
-            return (index * 2 + 1) < minHeap.Count;
-        }
-
-        private bool hasRightChild(int index)
-        {
-            return (index * 2 + 2) < minHeap.Count;
-        }
-
-        private int getLeftChildIndex(int index)
-        {
-            return index * 2 + 1;
-        }
-
-        private int getRightChildIndex(int index)
-        {
-            return index * 2 + 2;
-        }
-
-        private int getParentIndex(int childIndex)
-        {
-            return (childIndex - 1) / 2;
-        }
-
-        private int getRightChild(int index)
-        {
-            return minHeap[getRightChildIndex(index)];
-        }
-
-        private int getLeftChild(int index)
-        {
-            return minHeap[getLeftChildIndex(index)];
-        }
-
-        private int getParent(int index)
-        {
-            return minHeap[getParentIndex(index)];
-        }
-
-        private bool hasParent(int index)
-        {
-            return getParentIndex(index) >= 0;
-        }
-
-        private void swapItems(int indexOne, int indexTwo)
-        {
-            int aux = minHeap[indexOne];
-            minHeap[indexOne] = minHeap[indexTwo];
-            minHeap[indexTwo] = aux;
-        }
-
-        private void heapifyUp()
-        {
-            int index = minHeap.Count - 1;
-            while (hasParent(index) && totalCosts[getParent(index)] > totalCosts[minHeap[index]])
-            {
-                swapItems(index, getParentIndex(index));
-                index = getParentIndex(index);
-            }
-        }
-
-        private void heapifyDown()
-        {
-            int index = 0;
-            while (hasLeftChild(index))
-            {
-                int smallerChildIndex = getLeftChildIndex(index);
-                if (hasRightChild(index) && totalCosts[getRightChild(index)] < totalCosts[getLeftChild(index)])
-                {
-                    smallerChildIndex = getRightChildIndex(index);
-                }
-                if (totalCosts[minHeap[index]] < totalCosts[minHeap[smallerChildIndex]])
-                {
-                    break;
-                }
-                swapItems(index, smallerChildIndex);
-                index = smallerChildIndex;
-            }
-        }
 
 
 
-        public int minHeapPeak()
-        {
-            return minHeap[0];
-        }
 
-        public int minHeapPoll()
-        {
-            int item = minHeap[0];
-            minHeap[0] = minHeap[minHeap.Count - 1];
-            minHeap.RemoveAt(minHeap.Count - 1);
-            heapifyDown();
-            return item;
-        }
 
-        public void minHeapAdd(int item)
-        {
-            minHeap.Add(item);
-            heapifyUp();
-        }
 
-        public void printDebugData()
+        /*public void printDebugData()
         {
             Console.WriteLine("-----------------------------------------------------");
-            Console.WriteLine("Nearest: " + minHeapPeak());
+            Console.WriteLine("Nearest: " + minHeap[0]);
             Console.Write("Visited: ");
             foreach (var item in visited)
             {
@@ -243,7 +195,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                     Console.WriteLine(item.Key + " " + ngh.First + " " + ngh.Second);
                 }
             }
-        }
+        }*/
 
     }
 
