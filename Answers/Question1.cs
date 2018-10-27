@@ -12,7 +12,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         {
             int max = UInt16.MinValue;
 
-            for (int i = 0; i < portofolios.Length; i++)
+            for (int i = 0; i < portofolios.Length-1; i++)
             {
                 for (int ii = i + 1; ii < portofolios.Length; ii++)
                 {
@@ -20,6 +20,10 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                     if (result > max)
                     {
                         max = result;
+                        if (max == 0xFF)
+                        {
+                            return max;
+                        }
                     }
                 }
             }
