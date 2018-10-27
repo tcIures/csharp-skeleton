@@ -6,46 +6,53 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     {
         public static int Answer(string[,] machineToBeFixed, int numOfConsecutiveMachines)
         {
+            int n = machineToBeFixed.GetLength(0);
+            int m = machineToBeFixed.GetLength(1);
+
+            int[] t_arr = new int[m];
+
             int min = Int32.MaxValue;
-            bool ok = false;
-            for (int i = 0; i < machineToBeFixed.GetLength(0); i++)
+            int t = 0;
+            int nt = 0;
+
+            for (int i = 0; i < n; i++)
             {
-                ushort seenSoFar = 0;
-                for (int ii = 0; ii < machineToBeFixed.GetLength(1); ii++)
+                t = 0;
+                nt = 0;
+                for (int j = 0; j < m; j++)
                 {
-                    if (machineToBeFixed[i, ii].Equals("X"))
+                    if (machineToBeFixed[i, j].Equals("X"))
                     {
-                        seenSoFar = 0;
+                        t = 0;
+                        nt = 0;
                     }
                     else
                     {
-                        if (seenSoFar == numOfConsecutiveMachines - 1)
+                        int t_aux = Int32.Parse(machineToBeFixed[i, j]);
+                        nt++;
+                        t_arr[j] = t_aux;
+                        t += t_aux;
+                        if (nt == numOfConsecutiveMachines)
                         {
-                            ok = true;
-
-                            int time = 0;
-                            for (int k = 0; k < numOfConsecutiveMachines; k++)
+                            if (t < min)
                             {
-                                time += Convert.ToInt32(machineToBeFixed[i, ii - k]);
-                            }
-                            if (time < min)
-                            {
-                                min = time;
-                            }
-                        }
-                        else
-                        {
+                                min = t;
 
-                            seenSoFar += 1;
+                            }
+                            t -= t_arr[j - numOfConsecutiveMachines + 1];
+                            nt--;
                         }
                     }
                 }
             }
-            if (!ok)
+            if (min == Int32.MaxValue)
             {
                 return 0;
             }
-            return min;
+            else
+            {
+                return min;
+            }
         }
     }
 }
