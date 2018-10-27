@@ -4,39 +4,49 @@
     {
         public static int Answer(int[] cashflowIn, int[] cashflowOut)
         {
-            int n = cashflowIn.Length, m = cashflowOut.Length;
-            int bigNumber = 10000;
-            bool[] cando = new bool[bigNumber+4];
-            bool[] ans = new bool[bigNumber+4];
-            cando[0] = true;
-            ans[0] = false;
-            for (int i = 0; i < n; i++)
+            int maxSum = 10000;
+
+
+            bool[] res = new bool[maxSum + 1];
+            bool[] ok = new bool[maxSum+1];
+
+            res[0] = false;
+            ok[0] = true;
+           
+            for (int i = 0; i < cashflowIn.Length; i++)
             {
-                for (int j = bigNumber - cashflowIn[i]; j >= 0; j--)
+                for (int ii = maxSum - cashflowIn[i]; ii >= 0; ii--)
                 {
-                    if (cando[j])
+                    if (ok[ii])
                     {
-                        cando[j + cashflowIn[i]] = true;
-                        ans[j + cashflowIn[i]] = true;
-                        //System.out.println(j+cashflowIn[i]+"\n");
+                        ok[ii + cashflowIn[i]] = true;
+                        res[ii + cashflowIn[i]] = true;
                     }
                 }
             }
-            for (int i = 0; i < m; i++)
+            for (int i = 0; i < cashflowOut.Length; i++)
             {
-                for (int j = 0; j <= bigNumber; j++)
+                for (int ii = 0; ii <= maxSum; ii++)
                 {
-                    if (ans[j])
+                    if (res[ii])
                     {
-                        if (j > cashflowOut[i]) ans[j - cashflowOut[i]] = true;
-                        else ans[cashflowOut[i] - j] = true;
-                        // System.out.println(j-cashflowOut[i]+"\n");
+                        if (ii > cashflowOut[i])
+                        {
+                            res[ii - cashflowOut[i]] = true;
+                        }
+                        else
+                        {
+                            res[cashflowOut[i] - ii] = true;
+                        }
                     }
                 }
             }
-            for (int i = 0; i <= bigNumber; i++)
+            for (int i = 0; i <= maxSum; i++)
             {
-                if (ans[i]) return i;
+                if (res[i])
+                {
+                    return i;
+                }
             }
             return -1;
         }
