@@ -2,16 +2,16 @@
 {
     public class Question2
     {
-        public static int Answer(int[] cashflowIn, int[] cashflowOut)
+        public static int getAns(int[] cashflowIn, int[] cashflowOut)
         {
             int maxDiff = 10000;
 
             bool[] res = new bool[maxDiff + 1];
-            bool[] ok = new bool[maxDiff+1];
+            bool[] ok = new bool[maxDiff + 1];
 
             res[0] = false;
             ok[0] = true;
-           
+
             for (int i = 0; i < cashflowIn.Length; i++)
             {
                 for (int ii = maxDiff - cashflowIn[i]; ii >= 0; ii--)
@@ -48,6 +48,12 @@
                 }
             }
             return -1;
+        }
+
+
+        public static int Answer(int[] cashflowIn, int[] cashflowOut)
+        {
+            return Math.Max(getAns(cashflowIn, cashflowOut), getAns(cashflowOut, cashflowIn));
         }
     }
 }
