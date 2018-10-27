@@ -8,32 +8,35 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         {
             int min = Int32.MaxValue;
             bool ok = false;
-            int increment = numOfConsecutiveMachines - 1;
             for (int i = 0; i < machineToBeFixed.GetLength(0); i++)
             {
-                for (int ii = 0; ii < machineToBeFixed.GetLength(1) - increment; ii += increment)
+                ushort seenSoFar = 0;
+                for (int ii = 0; ii < machineToBeFixed.GetLength(1); ii++)
                 {
-                    if (!machineToBeFixed[i, ii].Equals("X") && !machineToBeFixed[i, ii + increment].Equals("X"))
+                    if (machineToBeFixed[i, ii].Equals("X"))
                     {
-                        int seenSoFar = Convert.ToInt32(machineToBeFixed[i, ii]) + Convert.ToInt32(machineToBeFixed[i, ii + increment]);
-                        bool ok1 = true;
-                        for (int j = ii + 1; j < ii + increment; j++)
-                        {
-                            if (machineToBeFixed[i, j].Equals("X"))
-                            {
-                                ok1 = false;
-                                break;
-                            }
-
-                            seenSoFar += Convert.ToInt32(machineToBeFixed[i, j]);
-                        }
-                        if (ok1)
+                        seenSoFar = 0;
+                    }
+                    else
+                    {
+                        if (seenSoFar == numOfConsecutiveMachines - 1)
                         {
                             ok = true;
-                            if (seenSoFar < min)
+
+                            int time = 0;
+                            for (int k = 0; k < numOfConsecutiveMachines; k++)
                             {
-                                min = seenSoFar;
+                                time += Convert.ToInt32(machineToBeFixed[i, ii - k]);
                             }
+                            if (time < min)
+                            {
+                                min = time;
+                            }
+                        }
+                        else
+                        {
+
+                            seenSoFar += 1;
                         }
                     }
                 }

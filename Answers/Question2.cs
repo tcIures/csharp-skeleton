@@ -4,18 +4,17 @@
     {
         public static int Answer(int[] cashflowIn, int[] cashflowOut)
         {
-            int maxSum = 10000;
+            int maxDiff = 10000;
 
-
-            bool[] res = new bool[maxSum + 1];
-            bool[] ok = new bool[maxSum+1];
+            bool[] res = new bool[maxDiff + 1];
+            bool[] ok = new bool[maxDiff+1];
 
             res[0] = false;
             ok[0] = true;
            
             for (int i = 0; i < cashflowIn.Length; i++)
             {
-                for (int ii = maxSum - cashflowIn[i]; ii >= 0; ii--)
+                for (int ii = maxDiff - cashflowIn[i]; ii >= 0; ii--)
                 {
                     if (ok[ii])
                     {
@@ -26,7 +25,7 @@
             }
             for (int i = 0; i < cashflowOut.Length; i++)
             {
-                for (int ii = 0; ii <= maxSum; ii++)
+                for (int ii = 0; ii <= maxDiff; ii++)
                 {
                     if (res[ii])
                     {
@@ -41,7 +40,7 @@
                     }
                 }
             }
-            for (int i = 0; i <= maxSum; i++)
+            for (int i = 0; i <= maxDiff; i++)
             {
                 if (res[i])
                 {
