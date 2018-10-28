@@ -20,7 +20,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                     if (result > max)
                     {
                         max = result;
-                        if (max == 0xFF)
+                        if (max == UInt16.MaxValue)
                         {
                             return max;
                         }
