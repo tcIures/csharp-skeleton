@@ -10,10 +10,23 @@
 
             values[0] = 0;
 
-            for (int i = 1; i <= totalValueOfShares; i++)
-                values[i] = int.MaxValue;
+            int minValue = Int32.MaxValue;
+
+            foreach (int num in numOfShares)
+            {
+                if (num < minValue)
+                {
+                    minValue = num;
+                }
+            }
 
             for (int i = 1; i <= totalValueOfShares; i++)
+            {
+                values[i] = int.MaxValue;
+            }
+
+
+            for (int i = minValue; i <= totalValueOfShares; i++)
             {
                 for (int j = 0; j < size; j++)
                     if (numOfShares[j] <= i)
