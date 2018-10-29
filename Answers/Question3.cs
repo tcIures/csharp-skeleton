@@ -108,9 +108,15 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 
             int minCover = sv.findMinCover(numOfNodes, numberOfEdges);
 
-            int result = numOfNodes - 2 * minCover;
+            int cardY = minCover;
+            int cardX = numOfNodes - cardY;
 
-            return result;
+            if (cardX < cardY)
+            {
+                return 0;
+            }
+
+            return cardX - cardY;
         }
     }
 }
