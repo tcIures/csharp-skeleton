@@ -8,7 +8,16 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     {
         public static int Answer(int numOfServers, int targetServer, int[,] connectionTimeMatrix)
         {
-            Graph gr = new Graph(numOfServers, targetServer, connectionTimeMatrix);
+            int[][] times = new int[numOfServers][];
+            for (int i = 0; i < numOfServers; i++)
+            {
+                times[i] = new int[numOfServers];
+                for (int j = 0; j < numOfServers; j++)
+                {
+                    times[i][j] = connectionTimeMatrix[i, j];
+                }
+            }
+            Graph gr = new Graph(numOfServers, targetServer, times);
             return gr.getShortestDistance(0);
         }
     }
@@ -16,10 +25,10 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     class Graph
     {
         private int V;
-        private int[,] graph;
+        private int[][] graph;
         private int target;
 
-        public Graph(int V, int target, int[,] times)
+        public Graph(int V, int target, int[][] times)
         {
             this.V = V;
 
@@ -77,10 +86,10 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                 for (int v = 0; v < V; v++)
                 {
 
-                    if (!frontier[v] && graph[u, v] != 0 && dist[u] != Int32.MaxValue
-                                      && dist[u] + graph[u, v] < dist[v])
+                    if (!frontier[v] && graph[u][v] != 0 && dist[u] != Int32.MaxValue
+                                      && dist[u] + graph[u][v] < dist[v])
                     {
-                        dist[v] = dist[u] + graph[u, v];
+                        dist[v] = dist[u] + graph[u][v];
                     }
                 }
 
