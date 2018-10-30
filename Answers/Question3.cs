@@ -36,13 +36,18 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 
                     int set = (1 << k) - 1;
                     int limit = (1 << V);
-                    bool[,] vis = new bool[MAXN, MAXN];
+                    bool[][] vis = new bool[MAXN][];
 
                     while (set < limit)
                     {
-                        for (int i = 0; i < MAXN * MAXN; i++)
+                        for (int i = 0; i < MAXN; i++)
                         {
-                            vis[i % MAXN, i / MAXN] = false;
+                            for (int j = 0; j < MAXN; j++)
+                            {
+                                vis[i] = new bool[MAXN];
+                                vis[i][j] = false;
+                            }
+
                         }
 
                         int cnt = 0;
@@ -55,10 +60,10 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                                 // vertex visited 
                                 for (int l = 1; l <= V; l++)
                                 {
-                                    if (gr[v, l] && !vis[v, l])
+                                    if (gr[v][l] && !vis[v][l])
                                     {
-                                        vis[v, l] = true;
-                                        vis[l, v] = true;
+                                        vis[v][l] = true;
+                                        vis[l][v] = true;
                                         cnt++;
                                     }
                                 }
