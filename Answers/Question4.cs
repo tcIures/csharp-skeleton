@@ -19,9 +19,16 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             {
                 t = 0;
                 nt = 0;
-                for (int j = 0; j < m; j++)
+                int start = 0;
+                while (machineToBeFixed[i, start] == "X")
                 {
-                    if (machineToBeFixed[i, j].Equals("X"))
+                    start += 1;
+                }
+                for (int j = start; j < m; j++)
+                {
+
+
+                    if (machineToBeFixed[i, j] == "X")
                     {
                         t = 0;
                         nt = 0;
