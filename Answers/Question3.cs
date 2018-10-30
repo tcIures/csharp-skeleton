@@ -21,52 +21,6 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             gr[edgeB, edgeA] = true;
         }
 
-        private bool isCover(int V, int k, int E)
-        {
-            int set = (1 << k) - 1;
-            int limit = (1 << V);
-            bool[,] vis = new bool[MAXN, MAXN];
-
-            while (set < limit)
-            {
-                for (int i = 0; i < MAXN * MAXN; i++)
-                {
-                    vis[i % MAXN, i / MAXN] = false;
-                }
-
-                int cnt = 0;
-
-                for (int j = 1, v = 1; j < limit; j = j << 1, v++)
-                {
-                    if ((set & j) != 0)
-                    {
-                        // Mark all edges emerging out of this 
-                        // vertex visited 
-                        for (int l = 1; l <= V; l++)
-                        {
-                            if (gr[v, l] && !vis[v, l])
-                            {
-                                vis[v, l] = true;
-                                vis[l, v] = true;
-                                cnt++;
-                            }
-                        }
-                    }
-                }
-
-                if (cnt == E)
-                {
-                    return true;
-                }
-                int c = set & -set;
-                int r = set + c;
-                set = (((r ^ set) >> 2) / c) | r;
-
-            }
-
-            return false;
-        }
-
         public int findMinCover(int n, int m)
         {
             // Binary search the answer 
@@ -74,7 +28,56 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             while (right > left)
             {
                 int mid = (left + right) >> 1;
-                if (isCover(n, mid, m) == false)
+                bool isCover = false;
+                {
+                    int V = n;
+                    int k = mid;
+                    int E = m;
+
+                    int set = (1 << k) - 1;
+                    int limit = (1 << V);
+                    bool[,] vis = new bool[MAXN, MAXN];
+
+                    while (set < limit)
+                    {
+                        for (int i = 0; i < MAXN * MAXN; i++)
+                        {
+                            vis[i % MAXN, i / MAXN] = false;
+                        }
+
+                        int cnt = 0;
+
+                        for (int j = 1, v = 1; j < limit; j = j << 1, v++)
+                        {
+                            if ((set & j) != 0)
+                            {
+                                // Mark all edges emerging out of this 
+                                // vertex visited 
+                                for (int l = 1; l <= V; l++)
+                                {
+                                    if (gr[v, l] && !vis[v, l])
+                                    {
+                                        vis[v, l] = true;
+                                        vis[l, v] = true;
+                                        cnt++;
+                                    }
+                                }
+                            }
+                        }
+
+                        if (cnt == E)
+                        {
+                            isCover = true;
+                            break;
+                        }
+                        int c = set & -set;
+                        int r = set + c;
+                        set = (((r ^ set) >> 2) / c) | r;
+
+                    }
+                }
+
+                if (isCover == false)
                     left = mid + 1;
                 else
                     right = mid;
