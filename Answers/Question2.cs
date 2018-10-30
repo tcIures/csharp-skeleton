@@ -7,7 +7,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     {
         public static int getAns(int[] cashflowIn, int[] cashflowOut)
         {
-            int maxDiff = 5000;
+            int maxDiff = 1000;
 
             bool[] res = new bool[maxDiff + 1];
             bool[] ok = new bool[maxDiff + 1];
