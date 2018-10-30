@@ -8,17 +8,22 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     {
         int MAXN = 31;
 
-        private bool[,] gr;
+        private bool[][] gr;
 
         public Solver()
         {
-            gr = new bool[MAXN, MAXN];
+            gr = new bool[MAXN][];
+
+            for (int i = 0; i < MAXN; i++)
+            {
+                gr[i] = new bool[MAXN];
+            }
         }
 
         public void insertEdge(int edgeA, int edgeB)
         {
-            gr[edgeA, edgeB] = true;
-            gr[edgeB, edgeA] = true;
+            gr[edgeA][edgeB] = true;
+            gr[edgeB][edgeA] = true;
         }
 
         public int findMinCover(int n, int m)
