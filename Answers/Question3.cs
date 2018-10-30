@@ -38,14 +38,18 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                     int limit = (1 << V);
                     bool[][] vis = new bool[MAXN][];
 
+                    for(int i = 0; i < MAXN; i++)
+                    {
+                        vis[i] = new bool[MAXN];
+                    }
+
                     while (set < limit)
                     {
                         for (int i = 0; i < MAXN; i++)
                         {
                             for (int j = 0; j < MAXN; j++)
                             {
-                                vis[i] = new bool[MAXN];
-                                vis[i][j] = false;
+                               vis[i][j] = false;
                             }
 
                         }
@@ -94,6 +98,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
             // size vertex cover = left = right 
             return left;
         }
+    }
 
 
     }
