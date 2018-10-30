@@ -73,6 +73,11 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 
                 frontier[u] = true;
 
+                if (u == target)
+                {
+                    return dist[u];
+                }
+
 
                 for (int v = 0; v < V; v++)
                 {
