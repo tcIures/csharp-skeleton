@@ -88,11 +88,11 @@ namespace C_Sharp_Challenge_Skeleton.Answers
 
         public int findMinCover()
         {
-            if (isTree())
+            /*if (isTree())
             {
-                return getMinCoverTree(1, -1);
+                //return getMinCoverTree(1, -1);
             }
-            else if (isBipartite())
+            else*/ if (isBipartite())
             {
                 return getMinCoverBipartite();
 
