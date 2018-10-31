@@ -9,7 +9,10 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         public static int Answer(int numOfServers, int targetServer, int[,] connectionTimeMatrix)
         {
             Graph gr = new Graph(numOfServers, targetServer, connectionTimeMatrix);
-            return gr.getShortestDistance(0);
+
+            return gr.getShortestDistance();
+
+          
         }
     }
 
