@@ -24,7 +24,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                 {
 
 
-                    if (machineToBeFixed[i, j] == "X")
+                    if (machineToBeFixed[i, j][0] == 'X')
                     {
                         t = 0;
                         nt = 0;
