@@ -10,7 +10,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         {
             Graph gr = new Graph(numOfServers, targetServer, connectionTimeMatrix);
 
-            return gr.getShortestDistance();
+            return gr.getShortestDistance(0);
 
           
         }
